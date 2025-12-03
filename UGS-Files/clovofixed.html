@@ -5,8 +5,6 @@
 <!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
 
 
-
-
 <html>
 <head>
 	<!-- Google tag (gtag.js) -->
@@ -63,26 +61,6 @@
 </head> 
  
 <body> 
-   <script>
-  (function() {
-    const originalImage = window.Image;
-    
-    window.Image = function() {
-      const img = new originalImage();
-      img.crossOrigin = "anonymous";
-      return img;
-    };
-    
-    const originalCreateElement = document.createElement.bind(document);
-    document.createElement = function(tagName) {
-      const element = originalCreateElement(tagName);
-      if (tagName.toLowerCase() === 'img') {
-        element.crossOrigin = "anonymous";
-      }
-      return element;
-    };
-  })();
-</script>
 	<div id="fb-root"></div>
 	
 	<script>
@@ -118,7 +96,27 @@
 	
 	<!-- Construct 2 exported games require jQuery. -->
 	<script src="jquery-3.4.1.min.js"></script>
-
+<script>
+(function() {
+    // Intercept ALL image creation
+    var OriginalImage = window.Image;
+    window.Image = function() {
+        var img = new OriginalImage();
+        img.crossOrigin = "anonymous";
+        return img;
+    };
+    
+    // Also intercept createElement for img tags
+    var originalCreateElement = document.createElement.bind(document);
+    document.createElement = function(tagName) {
+        var element = originalCreateElement(tagName);
+        if (tagName.toLowerCase() === 'img') {
+            element.crossOrigin = "anonymous";
+        }
+        return element;
+    };
+})();
+</script>
 	<script src="GameAnalytics.js"></script>
 	<script src="Tween.js"></script>
 	<script src="html2canvas.min.js"></script>
@@ -128,7 +126,7 @@
 	
     <!-- The runtime script.  You can rename it, but don't forget to rename the reference here as well.
     This file will have been minified and obfuscated if you enabled "Minify script" during export. -->
-	<script src="c5runtime.js"></script>
+	<script src="c7runtime.js"></script>
 
     <script>
 		// Start the Construct 2 project running on window load. 
@@ -179,7 +177,7 @@
     </script>
 	<script type="text/javascript">
 		
-        var VERSION = VERSION || (function(){ 
+        var VERSION = VERSION || (function(){
             return {
                 version : function() {
                     return "CTLE"
