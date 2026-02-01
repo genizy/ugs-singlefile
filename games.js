@@ -2270,7 +2270,6 @@ document.getElementById("lolbutton").remove();
                 };
                 btn.style.width = '100%';
                 btn.style.height = '100%';
-                btn.style.fontSize = '100';
                 buttonsContainer.appendChild(btn);
             });
         } else {
